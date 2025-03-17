@@ -1,0 +1,20 @@
+<div class="container col-lg-6 mt-5">
+    <h1 class="my-3">Register</h1>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+            <div [hidden]="email?.valid || email?.untouched" class="text-danger">
+                Email is required
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <div [hidden]="password?.valid || password?.untouched" class="text-danger">
+                Password is required
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+      </form>
+</div>

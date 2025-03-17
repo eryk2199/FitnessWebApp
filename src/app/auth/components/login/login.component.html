@@ -1,0 +1,23 @@
+<div class="container col-lg-6 mt-5">
+    <h1 class="my-3">Login</h1>
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+        <div class="alert alert-danger" [hidden]="!invalidCredentials">
+            Invalid credentials
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" [(ngModel)]="email" required #emailRef="ngModel">
+            <div [hidden]="emailRef.valid || emailRef.untouched" class="text-danger">
+                Email is required
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required #passwordRef="ngModel">
+            <div [hidden]="passwordRef.valid || passwordRef.untouched" class="text-danger">
+                Password is required
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+    </form>
+</div>
