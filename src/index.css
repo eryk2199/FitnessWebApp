@@ -1,68 +1,130 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
   margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+table, td, th {
+  border: solid 1px black;
+  border-collapse: collapse;
+  padding: 0.5em 1em;
+}
+
+th {
+  text-align: left;
+}
+
+.app-layout {
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.app-layout__content {
+  display: flex;
+  flex-grow: 1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.nav {
+  border-right: solid 1px lightgray;
+  padding: 1em;
+}
+
+.nav__logo {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.link-list__item {
+  margin-bottom: 1rem;
+}
+
+.link-list__item a {
+  text-decoration: none;
+  color: black;
+}
+
+.link-list__item a:hover {
+  color: green;
+}
+
+.link-list__item a.active {
+  color: green;
+}
+
+.footer {
+  padding: 1em;
+}
+
+.weigth-table {
+  margin-top: 1rem;
+}
+
+.dashboard {
+  padding: 1em;
+}
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2em;
+  min-width: 600px;
+}
+
+.modal__title {
+  margin-top: 0;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.input--text {
+  padding: .5em 1em;
+}
+
+.form__actions {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button {
+  padding: .5em 1em;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: none;
+  font-size: 1rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.button--danger {
+  background-color: red;
+  color: white;
+}
+
+.button--success {
+  background-color: green;
+  color: white;
 }
