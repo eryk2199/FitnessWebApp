@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import WeigthModal from "./WeigthModal";
 
 export default function WeigthDashboard() {
     const [weigthData, setWeigthData] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [weigthForm, setWeigthForm] = useState({date: new Date().toLocaleDateString("en-CA"), weigth: ""});
+    const [selectedWeigth, setSelectedWeigth] = useState();
 
     useEffect(() => {
         const data = localStorage.getItem("weigths");
@@ -13,19 +14,11 @@ export default function WeigthDashboard() {
         setWeigthData(JSON.parse(data));
     }, []);
 
-    const handleWeigthFormChange = (event) => {
-        setWeigthForm(prev => ({
-            ...prev, [event.target.name]: event.target.value
-        }));
-    };
-
-    const handleWeigthFormSubmit = (event) => {
-        event.preventDefault();
-        localStorage.setItem("weigths", JSON.stringify([...weigthData, weigthForm]));
+    const handleWeigthFormSubmit = (weigth) => {
+        localStorage.setItem("weigths", JSON.stringify([...weigthData, weigth]));
         setWeigthData(prev => ([
-            ...prev, weigthForm
+            ...prev, weigth
         ]));
-        setWeigthForm({date: new Date().toLocaleDateString("en-CA"), weigth: ""});
         setShowModal(false);
     }
 
@@ -38,6 +31,7 @@ export default function WeigthDashboard() {
                     <tr>
                         <th>date</th>
                         <th>weigth(kg)</th>
+                        <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,31 +39,16 @@ export default function WeigthDashboard() {
                     <tr>
                         <td>{w.date}</td>
                         <td>{w.weigth}</td>
+                        <td className="weigth-table__actions"> 
+                            <button className="button">Edit</button>
+                            <button className="button">Delete</button>
+                        </td>
                     </tr>
                     )}
                 </tbody>
             </table>
             {showModal && 
-            <>
-                <div className="backdrop"></div>
-                <div className="modal">
-                    <h1 className="modal__title">Add weigth</h1>
-                    <form onSubmit={handleWeigthFormSubmit}>
-                        <div className="form__group">
-                            <label>Date</label>
-                            <input type="date" className="input--text" name="date" value={weigthForm.date} onChange={handleWeigthFormChange} required/>
-                        </div>
-                        <div className="form__group">
-                            <label>Weigth(kg)</label>
-                            <input type="number" className="input--text" name="weigth" value={weigthForm.weigth} onChange={handleWeigthFormChange} required></input>
-                        </div>
-                        <div className="form__actions">
-                            <button className="button button--danger" type="button" onClick={() => setShowModal(false)}>Cancel</button>
-                            <button type="submit" className="button button--success">Add</button>
-                        </div>
-                    </form>
-                </div>
-            </>
+                <WeigthModal onSubmit={handleWeigthFormSubmit} onClose={() => setShowModal(false)} weigth={selectedWeigth}/>
             }
         </div>
     );

@@ -11,7 +11,7 @@ ul {
   list-style: none;
 }
 
-table, td, th {
+table, td, th, tr {
   border: solid 1px black;
   border-collapse: collapse;
   padding: 0.5em 1em;
@@ -127,4 +127,10 @@ th {
 .button--success {
   background-color: green;
   color: white;
+}
+
+.weigth-table__actions {
+  display: flex;
+  gap: 1rem;
+  border: 0;
 }
