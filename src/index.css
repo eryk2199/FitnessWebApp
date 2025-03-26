@@ -70,7 +70,7 @@ th {
 .dashboard {
   padding: 1em;
 }
-
+/* || Modal */
 .backdrop {
   background: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -86,12 +86,31 @@ th {
   top: 30%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 2em;
   min-width: 600px;
+  border-radius: 8px;
+}
+
+.modal__header {
+  padding: 1rem;
+  border-bottom: 1px lightgray solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__body {
+  padding: 1rem;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  border-top: solid 1px lightgray;
+  padding: 1rem;
 }
 
 .modal__title {
-  margin-top: 0;
+  margin: 0;
 }
 
 .form__group {
@@ -117,6 +136,7 @@ th {
   cursor: pointer;
   border: none;
   font-size: 1rem;
+  border-radius: 4px;
 }
 
 .button--danger {
@@ -133,4 +153,8 @@ th {
   display: flex;
   gap: 1rem;
   border: 0;
+}
+
+.close {
+  cursor: pointer;
 }

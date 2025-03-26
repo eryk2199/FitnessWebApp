@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Modal from "./Modal";
 
 export default function WeigthModal({onSubmit, onClose, weigth}) {
-    const [weigthForm, setWeigthForm] = useState({date: new Date().toLocaleDateString("en-CA"), weigth: ""});
+    const [weigthForm, setWeigthForm] = useState({date: new Date().toLocaleDateString("en-CA"), value: ""});
+    const form = useRef(null);
 
     useEffect(() => {
         if(weigth) {
@@ -18,29 +20,26 @@ export default function WeigthModal({onSubmit, onClose, weigth}) {
     const handleWeigthFormSubmit = (event) => {
         event.preventDefault();
         onSubmit(weigthForm);
-        setWeigthForm({date: new Date().toLocaleDateString("en-CA"), weigth: ""});
+        setWeigthForm({date: new Date().toLocaleDateString("en-CA"), value: ""});
+    }
+
+    const submitForm = () => {
+        console.log('a')
+        form.current.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true}))
     }
 
     return(
-        <>
-            <div className="backdrop"></div>
-            <div className="modal">
-                <h1 className="modal__title">Add weigth</h1>
-                <form onSubmit={handleWeigthFormSubmit}>
-                    <div className="form__group">
-                        <label>Date</label>
-                        <input type="date" className="input--text" name="date" value={weigthForm.date} onChange={handleWeigthFormChange} required/>
-                    </div>
-                    <div className="form__group">
-                        <label>Weigth(kg)</label>
-                        <input type="number" className="input--text" name="weigth" value={weigthForm.weigth} onChange={handleWeigthFormChange} required></input>
-                    </div>
-                    <div className="form__actions">
-                        <button className="button button--danger" type="button" onClick={() => onClose()}>Cancel</button>
-                        <button type="submit" className="button button--success">Add</button>
-                    </div>
-                </form>
-            </div>
-        </>
+        <Modal title="Add weight" confirmText="Add" onClose={() => onClose()} onConfirm={submitForm}>
+            <form onSubmit={handleWeigthFormSubmit} ref={form}>
+                <div className="form__group">
+                    <label>Date</label>
+                    <input type="date" className="input--text" name="date" value={weigthForm.date} onChange={handleWeigthFormChange} required/>
+                </div>
+                <div className="form__group">
+                    <label>Weigth(kg)</label>
+                    <input type="number" className="input--text" name="value" value={weigthForm.value} onChange={handleWeigthFormChange} required></input>
+                </div>
+            </form>
+        </Modal>
     )
 }
